@@ -9,4 +9,4 @@ Zakat Calculator With Python Django 5.1 framework
 - ![HTML Icon](https://img.icons8.com/color/100/000000/html-5.png) **HTML**
 - ![CSS Icon](https://img.icons8.com/color/100/000000/css3.png) **CSS**
 - ![JavaScript Icon](https://img.icons8.com/color/100/000000/javascript.png) **JavaScript**
-- ![Bootstrap Icon](https://img.icons8.com/color/100/000000/bootstrap.png) **Bootstrap**
+- ![Tailwind CSS](https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000) **Tailwind CSS**
