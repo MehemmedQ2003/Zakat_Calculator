@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'zakat_calculator.apps.ZakatCalculatorConfig',
     "admin_interface",
     "colorfield",
     'django.contrib.admin',
