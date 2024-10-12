@@ -14,7 +14,6 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='subcategories')
-    zakat_percentage= models.DecimalField(max_digits=10, decimal_places=5, default=0)
     name = models.CharField(max_length=100)
     
     def __str__(self):
