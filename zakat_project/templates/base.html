@@ -45,9 +45,9 @@
 
     <header class="mt-4 bg-dark border border-dark" style="border-top-right-radius: 150px;">
         <div class="container-fluid px-5 py-5">
-            <!-- ****************** Title ****************** -->
             <h1 class="text-white mb-4">Zekat Hesapla <i class="fa-solid fa-arrow-down border border-white px-2 py-1 rounded-pill"></i></h1>
             <div class="row g-2">
+                
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         {% for category in categories %}
@@ -98,7 +98,6 @@
                 </div>
 
 
-                <!-- ****************** Total Sum and Total Zakat Section ****************** -->
                 <div class="col-lg-6 col-md-12 col-sm-12 p-3">
                     <div class="">
                         <img src="{% static 'images/zekat-bagisi.png' %}" class="img-fluid border border-white rounded-4" alt="">
@@ -107,7 +106,38 @@
                         <div class="container">
                             <div class="row">
                                 <div class="totalPrice col-lg-12 col-md-12 col-sm-12 border border-success bg-success rounded-4 my-4">
+                                    <h1>Currency Converter</h1>
                                     <p class="fs-3 text-white my-3 p-3">Toplam Varlık: </p>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <label for="amount">Amount:</label>
+                                        <div class="totalPriceInput">
+                                            <input type="text" id="amount" name="amount" value=""><br><br>
+                                        </div>
+
+                                        <label for="from_currency">From Currency:</label>
+                                        <select id="from_currency" name="from_currency" required>
+                                            {% for currency in currencies %}
+                                                <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                                            {% endfor %}
+                                        </select><br><br>
+
+                                        <label for="to_currency">To Currency:</label>
+                                        <select id="to_currency" name="to_currency" required>
+                                            {% for currency in currencies %}
+                                                <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                                            {% endfor %}
+                                        </select><br><br>
+
+                                        <button type="submit">Convert</button>
+                                    </form>
+
+                                    {% if converted_amount %}
+                                        <h3>Converted Amount: {{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}</h3>
+                                    {% elif error %}
+                                        <h3>{{ error }}</h3>
+                                    {% endif %}
+
                                 </div>
                                 <div class="totalZekat col-lg-12 col-md-12 col-sm-12 border border-warning bg-warning rounded-4 my-4">
                                     <p class="fs-3 my-3 p-3">Toplam Zekat: </p>
@@ -118,6 +148,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="modal fade" id="dynamicInfoModal" tabindex="-1" aria-labelledby="dynamicInfoModalLabel" aria-hidden="true">
             <div class="modal-dialog">
