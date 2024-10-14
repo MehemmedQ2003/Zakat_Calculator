@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 10:11+0400\n"
+"POT-Creation-Date: 2024-10-14 21:29+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,34 +34,54 @@ msgstr "Asset"
 msgid "Zekat"
 msgstr "Zakat"
 
-#: templates/base.html:163
+#: templates/base.html:132
+msgid "Konvertör"
+msgstr "Converter"
+
+#: templates/base.html:136
+msgid "Miktar"
+msgstr "Amount"
+
+#: templates/base.html:142
+msgid "Para Biriminden"
+msgstr "From Currency"
+
+#: templates/base.html:150
+msgid "Para Birimine"
+msgstr "To Currency"
+
+#: templates/base.html:159
+msgid "Çevir"
+msgstr "Convert"
+
+#: templates/base.html:181
 msgid "Bilgi"
 msgstr "İnfo"
 
-#: templates/base.html:167
+#: templates/base.html:185
 msgid "Bilgi yükleniyor"
 msgstr "Loading information"
 
-#: templates/base.html:170
+#: templates/base.html:188
 msgid "Kapat"
 msgstr "Close"
 
-#: zakat_project/settings.py:142
+#: zakat_project/settings.py:143
 msgid "English"
 msgstr ""
 
-#: zakat_project/settings.py:143
+#: zakat_project/settings.py:144
 msgid "Turkish"
 msgstr ""
 
-#: zakat_project/settings.py:144
+#: zakat_project/settings.py:145
 msgid "Russian"
 msgstr ""
 
-#: zakat_project/settings.py:145
+#: zakat_project/settings.py:146
 msgid "German"
 msgstr ""
 
-#: zakat_project/settings.py:146
+#: zakat_project/settings.py:147
 msgid "French"
 msgstr ""

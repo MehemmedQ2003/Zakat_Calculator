@@ -114,10 +114,10 @@
               <div class="container">
                 <div class="row">
                   <div class="totalPrice col-lg-12 col-md-12 col-sm-12 border border-success bg-success rounded-4 my-4">
-                    <p class="fs-3 text-white my-3 p-3">Toplam Varlık:</p>
+                    <p class="fs-3 text-white my-3 p-3">{% trans 'Toplam Varlık' %}:</p>
                   </div>
                   <div class="totalZekat col-lg-12 col-md-12 col-sm-12 border border-warning bg-warning rounded-4 my-4">
-                    <p class="fs-3 my-3 p-3">Toplam Zekat:</p>
+                    <p class="fs-3 my-3 p-3">{% trans 'Toplam Zekat' %}:</p>
                   </div>
                 </div>
               </div>
@@ -129,17 +129,17 @@
               <div class='col-lg-10 col-md-12 col-sm-12 border border-dark bg-dark rounded-4 my-4 p-5'>
                 <form method="POST">
                   {% csrf_token %}
-                  <h1 class='text-white text-center mb-4'>Konvertör</h1>
+                  <h1 class='text-white text-center mb-4'>{% trans 'Konvertör' %}</h1>
                   <div class='container'>
                     <div class='row'>
                       <div class='col-lg-4 col-md-12 col-sm-12'>
-                        <label class='fs-6 my-2 text-white' for="amount">Miktar:</label>
+                        <label class='fs-6 my-2 text-white' for="amount">{% trans 'Miktar' %}:</label>
                         <div class="totalPriceInput">
-                          <input type="text" id="amount" name="amount" placeholder='1.00' class='form-control'/>
+                          <input type="text" id="amount" name="amount" placeholder='' class='form-control'/>
                         </div>
                       </div>
                       <div class='col-lg-4 col-md-6 col-sm-12'>
-                        <label class='fs-6 my-2 text-white' for="from_currency">Para Biriminden:</label>
+                        <label class='fs-6 my-2 text-white' for="from_currency">{% trans 'Para Biriminden' %}:</label>
                         <select id="from_currency" name="from_currency" required class="form-select" aria-label="Default select example">
                           {% for currency in currencies %}
                             <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
@@ -147,7 +147,7 @@
                         </select>
                       </div>
                       <div class='col-lg-4 col-md-6 col-sm-12'>
-                        <label class='fs-6 my-2 text-white' for="to_currency">Para Birimine:</label>
+                        <label class='fs-6 my-2 text-white' for="to_currency">{% trans 'Para Birimine' %}:</label>
                         <select id="to_currency" name="to_currency" required class="form-select" aria-label="Default select example">
                           {% for currency in currencies %}
                             <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
@@ -156,7 +156,7 @@
                       </div>
                       <div class='col-12 my-3'>
                         <div class='d-flex align-items-center justify-content-end'>
-                          <button type="submit" class='btn btn-primary text-white px-5'>Convert</button>
+                          <button type="submit" class='btn btn-primary text-white px-5'>{% trans 'Çevir' %}</button>
                         </div>
                       </div>
                     </div>
