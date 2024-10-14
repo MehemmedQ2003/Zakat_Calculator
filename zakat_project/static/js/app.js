@@ -74,14 +74,14 @@ function updateCategorySums() {
     totalSumZekat += parseFloat(zekatValue) || 0;
   });
 
-  const totalPriceElement = document.querySelector('.totalPrice p');
+  const totalPriceElement = document.querySelector('.totalPrice .value');
   if (totalPriceElement) {
-    totalPriceElement.textContent = `Toplam Varlık: ${totalSumPrice.toFixed(2)}`;
+    totalPriceElement.textContent = totalSumPrice.toFixed(2);
   }
 
-  const totalZekatElement = document.querySelector('.totalZekat p');
+  const totalZekatElement = document.querySelector('.totalZekat .value');
   if (totalZekatElement) {
-    totalZekatElement.textContent = `Toplam Zekat: ${totalSumZekat.toFixed(2)}`;
+    totalZekatElement.textContent = totalSumZekat.toFixed(2);
   }
 }
 

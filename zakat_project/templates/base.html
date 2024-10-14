@@ -19,31 +19,31 @@
       }
       
       ::-webkit-scrollbar-thumb {
-        background-color: #198754;
+        background-color: #000000;
         border-radius: 6px;
       }
     </style>
   </head>
   <body class="position-relative">
-    <nav class="navbar bg-success position-sticky w-100 top-0 z-3">
+    <nav class="navbar navbar-expand-lg bg-dark position-sticky w-100 top-0 z-3">
       <div class="container-fluid px-5 py-2">
-        <div class="d-flex justify-content-between w-100">
-          <div class="d-flex gap-5 w-100">
-            <img src="{% static 'images/zakat_logo.jpeg' %}" class="img-fluid navbar-brand text-white fw-bold" style="width: 50px" alt="" />
-          </div>
-            <select class="form-select w-auto focus-ring-success" onchange="location = this.value;">
-                <option value="{% url 'zakat_calculator:set-language' 'tr' %}" {% if request.LANGUAGE_CODE == 'tr' %}selected{% endif %}>Turkey</option>
-                <option value="{% url 'zakat_calculator:set-language' 'en' %}" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
-                <option value="{% url 'zakat_calculator:set-language' 'ru' %}" {% if request.LANGUAGE_CODE == 'ru' %}selected{% endif %}>Russian</option>
-                <option value="{% url 'zakat_calculator:set-language' 'de' %}" {% if request.LANGUAGE_CODE == 'de' %}selected{% endif %}>Deutsch</option>
-                <option value="{% url 'zakat_calculator:set-language' 'fr' %}" {% if request.LANGUAGE_CODE == 'fr' %}selected{% endif %}>French</option>
-            </select>
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="{% static 'images/zakat_logo.jpeg' %}" alt="Zakat Logo" width="50" class="me-3">
+          <h2 class=" text-white mb-0">{% trans 'Zekat Hesaplayıcı Site' %}</h2>
+        </a>
+        <div class="ms-auto">
+          <select class="form-select w-auto focus-ring-darkbg-dark" onchange="location = this.value;">
+            <option value="{% url 'zakat_calculator:set-language' 'tr' %}" {% if request.LANGUAGE_CODE == 'tr' %}selected{% endif %}>Türkçe</option>
+            <option value="{% url 'zakat_calculator:set-language' 'en' %}" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+            <option value="{% url 'zakat_calculator:set-language' 'ru' %}" {% if request.LANGUAGE_CODE == 'ru' %}selected{% endif %}>Русский</option>
+            <option value="{% url 'zakat_calculator:set-language' 'de' %}" {% if request.LANGUAGE_CODE == 'de' %}selected{% endif %}>Deutsch</option>
+            <option value="{% url 'zakat_calculator:set-language' 'fr' %}" {% if request.LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
           </select>
         </div>
       </div>
     </nav>
 
-    <header class="mt-4" style="background: #469B61; border-top-right-radius: 150px">
+    <header class="mt-4 bg-dark" style="border-top-right-radius: 150px">
       <div class="container-fluid px-5 py-5">
         <h1 class="text-white mb-4">
           {% trans 'Zekat Hesapla' %}
@@ -64,9 +64,9 @@
                     {% for subcategory in category.subcategories.all %}
                       <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
                         <b class="fs-4">{{ subcategory.name }}:</b>
-                        <input type="number" min="0" class="price form-control w-100 border border-success focus-ring" style="
+                        <input type="number" min="0" class="price form-control w-100 border border-darkbg-dark focus-ring" style="
                         --bs-focus-ring-color: rgba(
-                          var(--bs-success-rgb),
+                          var(--bs-darkbg-dark-rgb),
                           0.25
                         );
                       " />
@@ -79,9 +79,9 @@
                         <div class="col-lg-6 col-md-12 col-sm-12">
                           <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
                             <b class="fs-4">{% trans 'Varlık' %}:</b>
-                            <input type="number" min="0" class="sumPrice form-control w-100 border border-success focus-ring" style="
+                            <input type="number" min="0" class="sumPrice form-control w-100 border border-darkbg-dark focus-ring" style="
                               --bs-focus-ring-color: rgba(
-                                var(--bs-success-rgb),
+                                var(--bs-darkbg-dark-rgb),
                                 0.25
                               );
                             " />
@@ -89,10 +89,10 @@
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
                           <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
-                            <b class="fs-4">{% trans 'Zekat' %}:</b>
-                            <input type="number" min="0" class="sumZekat form-control w-100 border border-success focus-ring" style="
+                            <b class="fs-4"></b>
+                            <input type="number" min="0" class="sumZekat form-control w-100 border border-darkbg-dark focus-ring" style="
                               --bs-focus-ring-color: rgba(
-                                var(--bs-success-rgb),
+                                var(--bs-darkbg-dark-rgb),
                                 0.25
                               );
                             " />
@@ -114,10 +114,10 @@
               <div class="container">
                 <div class="row">
                   <div class="totalPrice col-lg-12 col-md-12 col-sm-12 border border-success bg-success rounded-4 my-4">
-                    <p class="fs-3 text-white my-3 p-3">{% trans 'Toplam Varlık' %}:</p>
+                    <p class="fs-3 text-white my-3 p-3"><span class="label">{% trans "Toplam Varlık" %}</span>: <span class="value"></span></p>
                   </div>
                   <div class="totalZekat col-lg-12 col-md-12 col-sm-12 border border-warning bg-warning rounded-4 my-4">
-                    <p class="fs-3 my-3 p-3">{% trans 'Toplam Zekat' %}:</p>
+                    <p class="fs-3 my-3 p-3"><span class="label">{% trans "Toplam Zekat" %}</span>: <span class="value"></span></p>
                   </div>
                 </div>
               </div>
@@ -126,20 +126,20 @@
 
           <div class='container'>
             <div class='row d-flex align-items-center justify-content-center'>
-              <div class='col-lg-10 col-md-12 col-sm-12 border border-dark bg-dark rounded-4 my-4 p-5'>
+              <div class='col-lg-8 col-md-12 col-sm-12 border border-info bg-info rounded-4 my-4 p-5'>
                 <form method="POST">
                   {% csrf_token %}
-                  <h1 class='text-white text-center mb-4'>{% trans 'Konvertör' %}</h1>
+                  <h1 class='text-black text-center mb-4'>{% trans 'Konvertör' %}</h1>
                   <div class='container'>
                     <div class='row'>
                       <div class='col-lg-4 col-md-12 col-sm-12'>
-                        <label class='fs-6 my-2 text-white' for="amount">{% trans 'Miktar' %}:</label>
+                        <label class='fs-6 my-2 text-dark fw-bold' for="amount">{% trans 'Miktar' %}:</label>
                         <div class="totalPriceInput">
                           <input type="text" id="amount" name="amount" placeholder='' class='form-control'/>
                         </div>
                       </div>
                       <div class='col-lg-4 col-md-6 col-sm-12'>
-                        <label class='fs-6 my-2 text-white' for="from_currency">{% trans 'Para Biriminden' %}:</label>
+                        <label class='fs-6 my-2 text-dark fw-bold' for="from_currency">{% trans 'Para Biriminden' %}:</label>
                         <select id="from_currency" name="from_currency" required class="form-select" aria-label="Default select example">
                           {% for currency in currencies %}
                             <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
@@ -147,7 +147,7 @@
                         </select>
                       </div>
                       <div class='col-lg-4 col-md-6 col-sm-12'>
-                        <label class='fs-6 my-2 text-white' for="to_currency">{% trans 'Para Birimine' %}:</label>
+                        <label class='fs-6 my-2 text-dark fw-bold' for="to_currency">{% trans 'Para Birimine' %}:</label>
                         <select id="to_currency" name="to_currency" required class="form-select" aria-label="Default select example">
                           {% for currency in currencies %}
                             <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
@@ -156,7 +156,7 @@
                       </div>
                       <div class='col-12 my-3'>
                         <div class='d-flex align-items-center justify-content-end'>
-                          <button type="submit" class='btn btn-primary text-white px-5'>{% trans 'Çevir' %}</button>
+                          <button type="submit" class='btn btn-dark text-white px-5'>{% trans 'Çevir' %}</button>
                         </div>
                       </div>
                     </div>
@@ -164,9 +164,14 @@
                 </form>
   
                 {% if converted_amount %}
-                  <h3 class='text-center text-white my-3'>{{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}</h3>
+                  <div class="d-flex justify-content-center mt-3">
+                    <span class='fs-3 fw-bold text-center text-dark bg-white border border-white rounded-4 my-3 p-3'>
+                      {{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}
+                    </span>
+                  </div>
+                
                 {% elif error %}
-                  <h3>{{ error }}</h3>
+                  <h3 class="text-center mt-3">{{ error }}</h3>
                 {% endif %}
               </div>
             </div>

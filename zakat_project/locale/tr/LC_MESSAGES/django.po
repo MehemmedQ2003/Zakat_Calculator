@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 21:29+0400\n"
+"POT-Creation-Date: 2024-10-14 22:00+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,16 +22,16 @@ msgstr ""
 msgid "Zakat Hesablayıcı Sitesi"
 msgstr ""
 
+#: templates/base.html:32
+msgid "Zekat Hesaplayıcı Site"
+msgstr ""
+
 #: templates/base.html:49
 msgid "Zekat Hesapla"
 msgstr ""
 
 #: templates/base.html:81
 msgid "Varlık"
-msgstr ""
-
-#: templates/base.html:92
-msgid "Zekat"
 msgstr ""
 
 #: templates/base.html:117
@@ -62,15 +62,15 @@ msgstr ""
 msgid "Çevir"
 msgstr ""
 
-#: templates/base.html:181
+#: templates/base.html:186
 msgid "Bilgi"
 msgstr ""
 
-#: templates/base.html:185
+#: templates/base.html:190
 msgid "Bilgi yükleniyor"
 msgstr ""
 
-#: templates/base.html:188
+#: templates/base.html:193
 msgid "Kapat"
 msgstr ""
 

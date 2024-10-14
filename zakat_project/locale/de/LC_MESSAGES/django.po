@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 21:29+0400\n"
+"POT-Creation-Date: 2024-10-14 22:00+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,10 @@ msgstr ""
 msgid "Zakat Hesablayıcı Sitesi"
 msgstr "Zakat Rechner Website"
 
+#: templates/base.html:32
+msgid "Zekat Hesaplayıcı Site"
+msgstr "Zakat Rechner Website"
+
 #: templates/base.html:49
 msgid "Zekat Hesapla"
 msgstr "Zakat berechnen"
@@ -30,10 +34,13 @@ msgstr "Zakat berechnen"
 msgid "Varlık"
 msgstr "Vermögenswert"
 
-#: templates/base.html:92
-msgid "Zekat"
-msgstr "Zakat"
+#: templates/base.html:117
+msgid "Toplam Varlık"
+msgstr "Gesamtvermögen"
 
+#: templates/base.html:120
+msgid "Toplam Zekat"
+msgstr "Gesamt-Zakat"
 
 #: templates/base.html:132
 msgid "Konvertör"
@@ -55,15 +62,15 @@ msgstr "In Währungseinheit"
 msgid "Çevir"
 msgstr "Konvertieren"
 
-#: templates/base.html:181
+#: templates/base.html:186
 msgid "Bilgi"
 msgstr "İnfo"
 
-#: templates/base.html:185
+#: templates/base.html:190
 msgid "Bilgi yükleniyor"
 msgstr "Informationen werden geladen"
 
-#: templates/base.html:188
+#: templates/base.html:193
 msgid "Kapat"
 msgstr "Schließen"
 
