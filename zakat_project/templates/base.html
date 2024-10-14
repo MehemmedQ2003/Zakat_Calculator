@@ -19,7 +19,7 @@
       }
       
       ::-webkit-scrollbar-thumb {
-        background-color: green;
+        background-color: #198754;
         border-radius: 6px;
       }
     </style>
@@ -107,49 +107,55 @@
           </div>
 
           <div class="col-lg-6 col-md-12 col-sm-12 p-3">
-            <div class="">
+            <div class="w-100">
               <img src="{% static 'images/zekat-bagisi.png' %}" class="img-fluid border border-white rounded-4" alt="" />
             </div>
             <div class="sum d-flex justify-content-between align-items-center">
               <div class="container">
                 <div class="row">
                   <div class="totalPrice col-lg-12 col-md-12 col-sm-12 border border-success bg-success rounded-4 my-4">
-                    <h1>Currency Converter</h1>
                     <p class="fs-3 text-white my-3 p-3">Toplam Varlık:</p>
-                    <form method="POST">
-                      {% csrf_token %}
-                      <label for="amount">Amount:</label>
-                      <div class="totalPriceInput">
-                        <input type="text" id="amount" name="amount" value="" /><br /><br />
-                      </div>
-
-                      <label for="from_currency">From Currency:</label>
-                      <select id="from_currency" name="from_currency" required>
-                        {% for currency in currencies %}
-                          <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
-                        {% endfor %}
-                      </select><br /><br />
-
-                      <label for="to_currency">To Currency:</label>
-                      <select id="to_currency" name="to_currency" required>
-                        {% for currency in currencies %}
-                          <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
-                        {% endfor %}
-                      </select><br /><br />
-
-                      <button type="submit">Convert</button>
-                    </form>
-
-                    {% if converted_amount %}
-                      <h3>Converted Amount: {{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}</h3>
-                    {% elif error %}
-                      <h3>{{ error }}</h3>
-                    {% endif %}
                   </div>
                   <div class="totalZekat col-lg-12 col-md-12 col-sm-12 border border-warning bg-warning rounded-4 my-4">
                     <p class="fs-3 my-3 p-3">Toplam Zekat:</p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='container'>
+            <div class='row d-flex align-items-center justify-content-center'>
+              <div class='col-lg-10 col-md-12 col-sm-12 border border-primary bg-primary rounded-4 my-4 p-5'>
+                <form method="POST">
+                  {% csrf_token %}
+                  <label class='fs-3' for="amount ">Amount:</label>
+                  <div class="totalPriceInput">
+                    <input type="text" id="amount" name="amount" class='form-control' /><br /><br />
+                  </div>
+  
+                  <label class='fs-3' for="from_currency">From Currency:</label>
+                  <select id="from_currency" name="from_currency" required class="form-select" aria-label="Default select example">
+                    {% for currency in currencies %}
+                      <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                    {% endfor %}
+                  </select><br /><br />
+  
+                  <label class='fs-3' for="to_currency">To Currency:</label>
+                  <select id="to_currency" name="to_currency" required class="form-select" aria-label="Default select example">
+                    {% for currency in currencies %}
+                      <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                    {% endfor %}
+                  </select><br /><br />
+  
+                  <button type="submit" class='btn btn-dark text-white'>Convert</button>
+                </form>
+  
+                {% if converted_amount %}
+                  <h3 class='text-center text-white my-3'>{{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}</h3>
+                {% elif error %}
+                  <h3>{{ error }}</h3>
+                {% endif %}
               </div>
             </div>
           </div>
