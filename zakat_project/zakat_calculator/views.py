@@ -2,6 +2,11 @@ import requests
 from django.shortcuts import render
 from .models import *
 from django.conf import settings
+from urllib.parse import urlparse
+from django.http import HttpResponseRedirect
+from django.urls.base import resolve, reverse
+from django.urls.exceptions import Resolver404
+from django.utils import translation
 
 def index(request):
     if request.method == 'POST':
@@ -41,3 +46,10 @@ def index(request):
         'categories' : Category.objects.all(),
     }
     return render(request, 'base.html', context)
+
+
+def set_language(request, language):
+    translation.activate(language)
+    response = HttpResponseRedirect(reverse('zakat_calculator:index'))
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response

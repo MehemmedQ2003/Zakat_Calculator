@@ -41,12 +41,14 @@ INSTALLED_APPS = [
     'zakat_calculator.apps.ZakatCalculatorConfig',
     "admin_interface",
     "colorfield",
+    'modeltranslation',
     'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -108,14 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -132,3 +126,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 FIXER_API_KEY = 'bf24a485d949eb89d70ba8d804d2a171'
+
+LANGUAGE_CODE = 'tr'
+
+USE_TZ = True
+
+USE_L10N = True
+
+USE_I18N = True
+
+TIME_ZONE = 'UTC'
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('tr', _('Turkish')),
+    ('ru', _('Russian')),
+    ('de', _('German')),
+    ('fr', _('French')),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'tr'
+
+MODELTRANSLATION_LANGUAGES = ('tr', 'en', 'ru', 'de', 'fr')

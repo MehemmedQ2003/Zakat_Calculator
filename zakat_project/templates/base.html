@@ -1,178 +1,185 @@
-{% load static %}
+{% load static %} 
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zakat Hesablayıcı Sitesi</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" href="{% static 'images/calculator_green.png' %}" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% trans 'Zakat Hesablayıcı Sitesi' %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="shortcut icon" href="{% static 'images/calculator_green.png' %}" type="image/x-icon" />
     <script src="https://kit.fontawesome.com/98ce4f3177.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
-        /* Chrome, Edge, və Safari üçün */
-        ::-webkit-scrollbar {
-            width: 12px;
-            background-color: #f1f1f1; /* Arxa fon rəngi */
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: green; /* Sürüşdürmə çubuğunun rəngi */
-            border-radius: 6px;
-        }
-
+      /* Chrome, Edge, və Safari üçün */
+      ::-webkit-scrollbar {
+        width: 12px;
+        background-color: #f1f1f1;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background-color: green;
+        border-radius: 6px;
+      }
     </style>
-</head>
-<body class="position-relative">
-
+  </head>
+  <body class="position-relative">
     <nav class="navbar bg-success position-sticky w-100 top-0 z-3">
-        <div class="container-fluid px-5 py-2">
-            <div class="d-flex justify-content-between w-100">
-                <div class="d-flex gap-5 w-100">
-                    <img src="{% static 'images/zakat_logo.jpeg' %}" class="img-fluid navbar-brand text-white fw-bold" style="width: 50px;" alt="">
-                </div>
-                <select class="form-select w-auto focus-ring-success">
-                    <option value="tr">Turkey</option>
-                    <option value="en">English</option>
-                    <option value="ru">Russian</option>
-                    <option value="de">Deutsch</option>
-                    <option value="fr">French</option>
-                </select>
-            </div>
+      <div class="container-fluid px-5 py-2">
+        <div class="d-flex justify-content-between w-100">
+          <div class="d-flex gap-5 w-100">
+            <img src="{% static 'images/zakat_logo.jpeg' %}" class="img-fluid navbar-brand text-white fw-bold" style="width: 50px" alt="" />
+          </div>
+            <select class="form-select w-auto focus-ring-success" onchange="location = this.value;">
+                <option value="{% url 'zakat_calculator:set-language' 'tr' %}" {% if request.LANGUAGE_CODE == 'tr' %}selected{% endif %}>Turkey</option>
+                <option value="{% url 'zakat_calculator:set-language' 'en' %}" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                <option value="{% url 'zakat_calculator:set-language' 'ru' %}" {% if request.LANGUAGE_CODE == 'ru' %}selected{% endif %}>Russian</option>
+                <option value="{% url 'zakat_calculator:set-language' 'de' %}" {% if request.LANGUAGE_CODE == 'de' %}selected{% endif %}>Deutsch</option>
+                <option value="{% url 'zakat_calculator:set-language' 'fr' %}" {% if request.LANGUAGE_CODE == 'fr' %}selected{% endif %}>French</option>
+            </select>
+          </select>
         </div>
+      </div>
     </nav>
 
-    <header class="mt-4 bg-dark border border-dark" style="border-top-right-radius: 150px;">
-        <div class="container-fluid px-5 py-5">
-            <h1 class="text-white mb-4">Zekat Hesapla <i class="fa-solid fa-arrow-down border border-white px-2 py-1 rounded-pill"></i></h1>
-            <div class="row g-2">
-                
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        {% for category in categories %}
-                            <div class="accordion-item my-3 border border-white rounded-4">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed fs-4 d-flex align-items-center gap-3 border border-white rounded-4" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapse{{ category.id }}" aria-expanded="false"
-                                        aria-controls="flush-collapse{{ category.id }}">
-                                        <b>{{ category.name }}</b>
-                                        <i class="fa-solid fa-circle-info info-icon" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#dynamicInfoModal" 
-                                        data-title="{{ category.name }}"
-                                        data-content="{{ category.info }}"
-                                        style="cursor: pointer;"></i>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapse{{ category.id }}" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionFlushExample">
-                                    {% for subcategory in category.subcategories.all %}
-                                        <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
-                                            <b class="fs-4">{{ subcategory.name }}: </b>
-                                            <input type="number" min="0" class="price form-control w-100 border border-success focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-success-rgb), .25)">
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div id="flush-collapse{{ category.id }}" class="container accordion-collapse collapse d-flex align-items-center" data-bs-parent="#accordionFlushExample">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                                <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
-                                                    <b class="fs-4">Varlık: </b>
-                                                    <input type="number" min="0" class="sumPrice form-control w-100 border border-success focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-success-rgb), .25)">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                                <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
-                                                    <b class="fs-4">Zekat: </b>
-                                                    <input type="number" min="0" class="sumZekat form-control w-100 border border-success focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-success-rgb), .25)">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-
-                <div class="col-lg-6 col-md-12 col-sm-12 p-3">
-                    <div class="">
-                        <img src="{% static 'images/zekat-bagisi.png' %}" class="img-fluid border border-white rounded-4" alt="">
-                    </div>
-                    <div class="sum d-flex justify-content-between align-items-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="totalPrice col-lg-12 col-md-12 col-sm-12 border border-success bg-success rounded-4 my-4">
-                                    <h1>Currency Converter</h1>
-                                    <p class="fs-3 text-white my-3 p-3">Toplam Varlık: </p>
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <label for="amount">Amount:</label>
-                                        <div class="totalPriceInput">
-                                            <input type="text" id="amount" name="amount" value=""><br><br>
-                                        </div>
-
-                                        <label for="from_currency">From Currency:</label>
-                                        <select id="from_currency" name="from_currency" required>
-                                            {% for currency in currencies %}
-                                                <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
-                                            {% endfor %}
-                                        </select><br><br>
-
-                                        <label for="to_currency">To Currency:</label>
-                                        <select id="to_currency" name="to_currency" required>
-                                            {% for currency in currencies %}
-                                                <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
-                                            {% endfor %}
-                                        </select><br><br>
-
-                                        <button type="submit">Convert</button>
-                                    </form>
-
-                                    {% if converted_amount %}
-                                        <h3>Converted Amount: {{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}</h3>
-                                    {% elif error %}
-                                        <h3>{{ error }}</h3>
-                                    {% endif %}
-
-                                </div>
-                                <div class="totalZekat col-lg-12 col-md-12 col-sm-12 border border-warning bg-warning rounded-4 my-4">
-                                    <p class="fs-3 my-3 p-3">Toplam Zekat: </p>
-                                </div>
-                            </div>
+    <header class="mt-4 bg-dark border border-dark" style="border-top-right-radius: 150px">
+      <div class="container-fluid px-5 py-5">
+        <h1 class="text-white mb-4">
+          {% trans 'Zekat Hesapla' %}
+          <i class="fa-solid fa-arrow-down border border-white px-2 py-1 rounded-pill"></i>
+        </h1>
+        <div class="row g-2">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              {% for category in categories %}
+                <div class="accordion-item my-3 border border-white rounded-4">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fs-4 d-flex align-items-center gap-3 border border-white rounded-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ category.id }}" aria-expanded="false" aria-controls="flush-collapse{{ category.id }}">
+                      <b>{{ category.name }}</b>
+                      <i class="fa-solid fa-circle-info info-icon" data-bs-toggle="modal" data-bs-target="#dynamicInfoModal" data-title="{{ category.name }}" data-content="{{ category.info }}" style="cursor: pointer"></i>
+                    </button>
+                  </h2>
+                  <div id="flush-collapse{{ category.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    {% for subcategory in category.subcategories.all %}
+                      <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
+                        <b class="fs-4">{{ subcategory.name }}:</b>
+                        <input type="number" min="0" class="price form-control w-100 border border-success focus-ring" style="
+                        --bs-focus-ring-color: rgba(
+                          var(--bs-success-rgb),
+                          0.25
+                        );
+                      " />
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div id="flush-collapse{{ category.id }}" class="container accordion-collapse collapse d-flex align-items-center" data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                          <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
+                            <b class="fs-4">{% trans 'Varlık' %}:</b>
+                            <input type="number" min="0" class="sumPrice form-control w-100 border border-success focus-ring" style="
+                              --bs-focus-ring-color: rgba(
+                                var(--bs-success-rgb),
+                                0.25
+                              );
+                            " />
+                          </div>
                         </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                          <div class="accordion-body d-flex align-items-center justify-content-between gap-3">
+                            <b class="fs-4">{% trans 'Zekat' %}:</b>
+                            <input type="number" min="0" class="sumZekat form-control w-100 border border-success focus-ring" style="
+                              --bs-focus-ring-color: rgba(
+                                var(--bs-success-rgb),
+                                0.25
+                              );
+                            " />
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              {% endfor %}
             </div>
-        </div>
+          </div>
 
+          <div class="col-lg-6 col-md-12 col-sm-12 p-3">
+            <div class="">
+              <img src="{% static 'images/zekat-bagisi.png' %}" class="img-fluid border border-white rounded-4" alt="" />
+            </div>
+            <div class="sum d-flex justify-content-between align-items-center">
+              <div class="container">
+                <div class="row">
+                  <div class="totalPrice col-lg-12 col-md-12 col-sm-12 border border-success bg-success rounded-4 my-4">
+                    <h1>Currency Converter</h1>
+                    <p class="fs-3 text-white my-3 p-3">Toplam Varlık:</p>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <label for="amount">Amount:</label>
+                      <div class="totalPriceInput">
+                        <input type="text" id="amount" name="amount" value="" /><br /><br />
+                      </div>
 
+                      <label for="from_currency">From Currency:</label>
+                      <select id="from_currency" name="from_currency" required>
+                        {% for currency in currencies %}
+                          <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                        {% endfor %}
+                      </select><br /><br />
 
-        <div class="modal fade" id="dynamicInfoModal" tabindex="-1" aria-labelledby="dynamicInfoModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="dynamicInfoModalLabel">Bilgi</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="dynamicModalContent">Bilgi yükleniyor...</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                    </div>
+                      <label for="to_currency">To Currency:</label>
+                      <select id="to_currency" name="to_currency" required>
+                        {% for currency in currencies %}
+                          <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                        {% endfor %}
+                      </select><br /><br />
+
+                      <button type="submit">Convert</button>
+                    </form>
+
+                    {% if converted_amount %}
+                      <h3>Converted Amount: {{ amount }} {{ from_currency }} = {{ converted_amount|floatformat:2 }} {{ to_currency }}</h3>
+                    {% elif error %}
+                      <h3>{{ error }}</h3>
+                    {% endif %}
+                  </div>
+                  <div class="totalZekat col-lg-12 col-md-12 col-sm-12 border border-warning bg-warning rounded-4 my-4">
+                    <p class="fs-3 my-3 p-3">Toplam Zekat:</p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+
+      <div class="modal fade" id="dynamicInfoModal" tabindex="-1" aria-labelledby="dynamicInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="dynamicInfoModalLabel">{% trans 'Bilgi' %}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p id="dynamicModalContent">{% trans 'Bilgi yükleniyor' %}...</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Kapat' %}</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
-
-
     <script src="{% static 'js/app.js' %}"></script>
+    <script>
+        function changeLanguage(language) {
+            window.location.href = "{% url 'zakat_calculator:set-language' '__LANGUAGE__' %}".replace('__LANGUAGE__', language);
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-
+  </body>
 </html>
