@@ -43,7 +43,7 @@
       </div>
     </nav>
 
-    <header class="mt-4 bg-dark border border-dark" style="border-top-right-radius: 150px">
+    <header class="mt-4" style="background: #469B61; border-top-right-radius: 150px">
       <div class="container-fluid px-5 py-5">
         <h1 class="text-white mb-4">
           {% trans 'Zekat Hesapla' %}
@@ -126,29 +126,41 @@
 
           <div class='container'>
             <div class='row d-flex align-items-center justify-content-center'>
-              <div class='col-lg-10 col-md-12 col-sm-12 border border-primary bg-primary rounded-4 my-4 p-5'>
+              <div class='col-lg-10 col-md-12 col-sm-12 border border-dark bg-dark rounded-4 my-4 p-5'>
                 <form method="POST">
                   {% csrf_token %}
-                  <label class='fs-3' for="amount ">Amount:</label>
-                  <div class="totalPriceInput">
-                    <input type="text" id="amount" name="amount" class='form-control' /><br /><br />
+                  <h1 class='text-white text-center mb-4'>Konvertör</h1>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-lg-4 col-md-12 col-sm-12'>
+                        <label class='fs-6 my-2 text-white' for="amount">Miktar:</label>
+                        <div class="totalPriceInput">
+                          <input type="text" id="amount" name="amount" placeholder='1.00' class='form-control'/>
+                        </div>
+                      </div>
+                      <div class='col-lg-4 col-md-6 col-sm-12'>
+                        <label class='fs-6 my-2 text-white' for="from_currency">Para Biriminden:</label>
+                        <select id="from_currency" name="from_currency" required class="form-select" aria-label="Default select example">
+                          {% for currency in currencies %}
+                            <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class='col-lg-4 col-md-6 col-sm-12'>
+                        <label class='fs-6 my-2 text-white' for="to_currency">Para Birimine:</label>
+                        <select id="to_currency" name="to_currency" required class="form-select" aria-label="Default select example">
+                          {% for currency in currencies %}
+                            <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class='col-12 my-3'>
+                        <div class='d-flex align-items-center justify-content-end'>
+                          <button type="submit" class='btn btn-primary text-white px-5'>Convert</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-  
-                  <label class='fs-3' for="from_currency">From Currency:</label>
-                  <select id="from_currency" name="from_currency" required class="form-select" aria-label="Default select example">
-                    {% for currency in currencies %}
-                      <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
-                    {% endfor %}
-                  </select><br /><br />
-  
-                  <label class='fs-3' for="to_currency">To Currency:</label>
-                  <select id="to_currency" name="to_currency" required class="form-select" aria-label="Default select example">
-                    {% for currency in currencies %}
-                      <option value="{{ currency.abreviation }}">{{ currency.abreviation }} - {{ currency.name }}</option>
-                    {% endfor %}
-                  </select><br /><br />
-  
-                  <button type="submit" class='btn btn-dark text-white'>Convert</button>
                 </form>
   
                 {% if converted_amount %}
