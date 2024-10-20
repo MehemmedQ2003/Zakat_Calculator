@@ -1,0 +1,128 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    -ms-overflow-style: none;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0B1B28 #f1f1f1;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0B1B28;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    width: 20px;
+    background: #0B1B28;
+}
+
+nav {
+    background-color: #0B1B28;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.container {
+    max-width: 1100px;
+}
+
+.title {
+    background-color: #0B1B28;
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+}
+
+fieldset {
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+fieldset:hover {
+    transform: translateY(-5px);
+}
+
+legend {
+    background-color: #0B1B28;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.form-control:focus {
+    border-color: #0B1B28;
+    box-shadow: 5px 5px 5px 5px #0B1B28;
+}
+
+#result {
+    background: #0B1B28;
+    color: white;
+}
+
+.modal-header {
+    background-color: #0B1B28;
+    color: white;
+}
+
+.btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    color: #fff;
+}
+
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #0B1B28;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 10px 30px 10px 15px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.custom-select select:hover,
+.custom-select select:focus {
+    background-color: #1a2a3a;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.custom-select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.custom-select select option {
+    background-color: #0B1B28;
+    color: #fff;
+}
