@@ -6,13 +6,18 @@ body {
     -ms-overflow-style: none;
 }
 
+::selection{
+    background-color: white;
+    color: #1a2a3a;
+}
+
 * {
     scrollbar-width: thin;
     scrollbar-color: #0B1B28 #f1f1f1;
 }
 
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 25px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,7 +30,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    width: 20px;
+    width: 25px;
     background: #0B1B28;
 }
 

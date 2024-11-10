@@ -41,13 +41,14 @@ function calculate() {
     let totalZakat = 0;
     categories.forEach(category => {
         const categoryTotal = parseFloat(document.getElementById(category.total).value) || 0;
-        const categoryRatio = categoryTotal / totalAssets;
+        const categoryRatio = totalAssets > 0 ? categoryTotal / totalAssets : 0; // Avoid division by zero
         const categoryNetAssets = netAssets * categoryRatio;
         const zakat = Math.max(categoryNetAssets * 0.025, 0); // 2.5% of net assets, minimum 0
         document.getElementById(category.zakat).value = zakat.toFixed(2);
         totalZakat += zakat;
     });
 
+    // Update total zakat amount
     document.getElementById('zakatAmount').textContent = totalZakat.toFixed(2);
 }
 
